@@ -50,7 +50,6 @@ module.exports = {
     },
     logout:function(req,res){
       var loggedOutUser=req.session.username;
-      console.log(loggedOutUser);
       req.session.destroy();
       res.render('logout',{
         loggedOutUser:loggedOutUser

@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var dbURI = 'mongodb://localhost/leavethemarks';
+var dbURI = 'mongodb://root:root@ds041939.mlab.com:41939/leavethemarks';
 var bcrypt = require('bcrypt');
 
 mongoose.connect(dbURI);
@@ -60,3 +60,16 @@ userSchema.methods.comparePassword = function(password, callback) {
 
 
 mongoose.model('User', userSchema);
+
+var storiesSchema = new mongoose.Schema({
+  author:String,
+  title: {type: String,unique:true},
+  created_at:{type:Date,default:Date.now},
+  summary:String,
+  content: {type: String},
+  imageLink:String,
+  comments:[{body:String,commented_by:String,date:Date}],
+  slug:String
+});
+
+mongoose.model( 'Story', storiesSchema,'stories');

@@ -9,5 +9,15 @@ module.exports = {
     },
     register: function(req, res) {
         res.render('register')
+    },
+    newStory: function(req, res) {
+        if (req.session.loggedIn !== true) {
+            res.redirect('/login');
+        } else {
+            res.render('new-story', {
+                session: req.session
+            });
+        }
+
     }
 }

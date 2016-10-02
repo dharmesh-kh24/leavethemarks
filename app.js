@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var db = require('./models/db.js');
 var routes = require('./routes/routes')
 var user = require('./routes/user')
+var story = require('./routes/story')
 
 app.set('view engine', 'ejs');
 
@@ -25,7 +26,12 @@ app.get('/login', routes.login)
 app.get('/register', routes.register)
 app.post('/newUser', user.createUser)
 app.post('/authenticate', user.login)
-app.get('/logout',user.logout)
+app.get('/logout', user.logout)
+app.post('/add-story', story.addStory);
+app.get('/stories', story.stories);
+app.get('/new-story', routes.newStory);
+app.get('/stories/:story', story.getStory);
+app.post('/stories/:slug/saveComment', story.saveComment);
 
 var port = process.env.PORT || 4006;
 app.listen(port, function(req, res) {
